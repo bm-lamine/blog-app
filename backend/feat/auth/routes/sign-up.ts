@@ -3,6 +3,7 @@ import { createApp } from "core/utils/create-app";
 import { STATUS_CODE } from "core/utils/status-code";
 import { zodValidator } from "core/utils/zod-validator";
 import { signUp } from "feat/auth/schema/sign-up";
+import { users_ee } from "feat/users/events/emitter";
 import { UsersRepo } from "feat/users/repository";
 
 const signup = createApp();
@@ -30,6 +31,8 @@ signup.post("/", zodValidator("json", signUp), async (ctx) => {
     errors.addError({ message: "Internal Server Error" });
     return ctx.json(errors.toJSON(), STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
+
+  users_ee.emit(ctx, "user:verify-email", newUser);
 
   return ctx.json({
     user: { ...newUser, password: null },

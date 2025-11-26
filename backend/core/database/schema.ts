@@ -8,4 +8,5 @@ export const users = createTable("users", (c) => ({
   name: c.text().notNull(),
   email: c.text().notNull().unique(),
   password: c.text().notNull(),
+  emailVerified: c.boolean().notNull().default(false),
 }));

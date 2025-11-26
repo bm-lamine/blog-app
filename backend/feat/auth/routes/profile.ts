@@ -1,4 +1,4 @@
-import jwt from "core/middleware/jwt";
+import jwt from "core/middlewares/jwt";
 import ApiError from "core/utils/api-response";
 import { createApp } from "core/utils/create-app";
 import { STATUS_CODE } from "core/utils/status-code";

@@ -2,8 +2,8 @@ import { schema } from "core/database";
 import { createInsertSchema } from "drizzle-zod";
 import z from "zod";
 
-export const createUser = createInsertSchema(schema.users, {
+export const createUserDto = createInsertSchema(schema.users, {
   email: z.email(),
 }).omit({ id: true });
 
-export type CreateUser = z.infer<typeof createUser>;
+export type CreateUserDto = z.infer<typeof createUserDto>;
