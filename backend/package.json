@@ -2,7 +2,7 @@
   "name": "backend",
   "private": true,
   "scripts": {
-    "dev": "bun ---watch cmd/api/index.ts",
+    "dev": "bun --watch cmd/api/index.ts",
     "build": "bun build cmd/api/index.ts --target bun --outdir ./dist",
     "start": "NODE_ENV=production bun dist/index.js",
     "db:generate": "drizzle-kit generate",
@@ -20,8 +20,10 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@hono/zod-validator": "^0.7.5",
     "@t3-oss/env-core": "^0.13.8",
     "drizzle-orm": "^0.44.7",
+    "drizzle-zod": "^0.8.3",
     "hono": "^4.10.7",
     "nanoid": "^5.1.6",
     "postgres": "^3.4.7",
