@@ -8,10 +8,19 @@ export const env = createEnv({
       .enum(["development", "production", "testing"])
       .default("development"),
     DATABASE_URL: z.url(),
+    REDIS_URL: z.url(),
+    // AUTH
     JWT_SECRET: z.string(),
+    // SMTP
     SMTP_HOST: z.string(),
     SMTP_PORT: z.coerce.number(),
-    REDIS_URL: z.url(),
+    // S3
+    S3_BUCKET: z.string().default("uploads"),
+    S3_ENDPOINT: z.url().default("http://localhost:9000"),
+    S3_REGION: z.string().default("us-east-1"),
+    S3_ACCESS_KEY_ID: z.string().default("minio_admin"),
+    S3_SECRET_ACCESS_KEY: z.string().default("minio_admin"),
+    TUS_FORCE_PATH_STYLE: z.coerce.boolean().default(true),
   },
 
   /**
