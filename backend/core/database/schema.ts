@@ -1,4 +1,4 @@
-import { pgTableCreator } from "drizzle-orm/pg-core";
+import { foreignKey, pgTableCreator } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";
 
 export const createTable = pgTableCreator((name) => `${name}_tbl`);
@@ -10,3 +10,20 @@ export const users = createTable("users", (c) => ({
   password: c.text().notNull(),
   emailVerified: c.boolean().notNull().default(false),
 }));
+
+export const posts = createTable(
+  "posts",
+  (c) => ({
+    id: c.text().primaryKey().$defaultFn(nanoid),
+    slug: c.text().notNull().unique(),
+    title: c.text().notNull(),
+    content: c.text().notNull(),
+    cover: c.text().notNull(),
+    author_id: c.text().notNull(),
+    published_at: c
+      .timestamp({ mode: "date", withTimezone: true })
+      .$defaultFn(() => new Date())
+      .notNull(),
+  }),
+  (t) => [foreignKey({ columns: [t.author_id], foreignColumns: [users.id] })]
+);

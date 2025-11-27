@@ -1,5 +1,5 @@
 import { createEnv } from "@t3-oss/env-core";
-import z from "zod";
+import z, { xid } from "zod";
 
 export const env = createEnv({
   server: {
@@ -21,6 +21,10 @@ export const env = createEnv({
     S3_ACCESS_KEY_ID: z.string().default("minio_admin"),
     S3_SECRET_ACCESS_KEY: z.string().default("minio_admin"),
     TUS_FORCE_PATH_STYLE: z.coerce.boolean().default(true),
+    // TYPESENSE
+    TYPESENSE_API_KEY: z.string(),
+    TYPESENSE_HOST: z.string(),
+    TYPESENSE_PORT: z.coerce.number(),
   },
 
   /**
