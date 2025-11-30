@@ -15,7 +15,6 @@ export const posts = createTable(
   "posts",
   (c) => ({
     id: c.text().primaryKey().$defaultFn(nanoid),
-    slug: c.text().notNull().unique(),
     title: c.text().notNull(),
     content: c.text().notNull(),
     cover: c.text().notNull(),

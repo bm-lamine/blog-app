@@ -11,6 +11,7 @@ export const env = createEnv({
     REDIS_URL: z.url(),
     // AUTH
     JWT_SECRET: z.string(),
+    JWT_COOKIE: z.string(),
     // SMTP
     SMTP_HOST: z.string(),
     SMTP_PORT: z.coerce.number(),

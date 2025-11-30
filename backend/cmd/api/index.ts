@@ -1,8 +1,8 @@
 import { env } from "core/config/env";
 import { tus } from "core/storage/tus";
 import { createApp } from "core/utils/create-app";
+import { api } from "feat/api";
 import { auth } from "feat/auth";
-import { main } from "feat/main";
 import { cors } from "hono/cors";
 import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
@@ -13,7 +13,7 @@ const app = createApp();
 app.use(logger(), requestId(), cors());
 app.all("/files/*", (ctx) => tus.handleWeb(ctx.req.raw));
 app.route("/auth", auth);
-app.route("/main", main);
+app.route("/api", api);
 showRoutes(app);
 
 export default {
