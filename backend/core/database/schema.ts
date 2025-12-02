@@ -18,11 +18,11 @@ export const posts = createTable(
     title: c.text().notNull(),
     content: c.text().notNull(),
     cover: c.text().notNull(),
-    author_id: c.text().notNull(),
+    uid: c.text().notNull(),
     published_at: c
       .timestamp({ mode: "date", withTimezone: true })
       .$defaultFn(() => new Date())
       .notNull(),
   }),
-  (t) => [foreignKey({ columns: [t.author_id], foreignColumns: [users.id] })]
+  (t) => [foreignKey({ columns: [t.uid], foreignColumns: [users.id] })]
 );

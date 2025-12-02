@@ -4,11 +4,11 @@ import { redis } from "core/storage/redis";
 import { createApp } from "core/utils/create-app";
 import { STATUS_CODE } from "core/utils/status-code";
 import { zodValidator } from "core/utils/zod-validator";
+import { PostsDto } from "feat/posts/posts.dto";
+import { posts_ee } from "feat/posts/posts.ee";
+import { PostsRepo } from "feat/posts/posts.repo";
 import { HTTPException } from "hono/http-exception";
 import z from "zod";
-import { PostsDto } from "./posts.dto";
-import { posts_ee } from "./posts.ee";
-import { PostsRepo } from "./posts.repo";
 
 const app = createApp();
 
