@@ -1,8 +1,8 @@
 import { zValidator } from "@hono/zod-validator";
 import type { ValidationTargets } from "hono";
 import type { ZodType } from "zod";
-import ApiError from "./api-response";
-import { STATUS_CODE } from "./status-code";
+import ApiError from "../utils/api-response";
+import { STATUS_CODE } from "../lib/status-code";
 
 export function zodValidator<
   T extends ZodType,

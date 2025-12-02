@@ -8,18 +8,21 @@ import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
 import { requestId } from "hono/request-id";
 
+// -----------------------------------------------------------------------------
 const app = createApp().basePath("/api");
 
+// Global Middlewares ----------------------------------------------------------
 app.use(logger(), requestId(), cors());
 
-// API Routes
+// API Routes ------------------------------------------------------------------
 app.all("/files/*", (ctx) => tus.handleWeb(ctx.req.raw));
 app.route("/auth", auth);
 app.route("/posts", posts);
 
-// Dev Plugins
+// Dev Plugins -----------------------------------------------------------------
 showRoutes(app);
 
+// -----------------------------------------------------------------------------
 export default {
   fetch: app.fetch,
   port: env.API_PORT,

@@ -1,8 +1,8 @@
 import { env } from "core/config/env";
+import { STATUS_CODE } from "core/lib/status-code";
+import { zodValidator } from "core/middlewares/zod-validator";
 import ApiError from "core/utils/api-response";
 import { createApp } from "core/utils/create-app";
-import { STATUS_CODE } from "core/utils/status-code";
-import { zodValidator } from "core/utils/zod-validator";
 import { AuthDto } from "feat/auth/auth.dto";
 import { UsersRepo } from "feat/users/users.repo";
 import * as jwt from "hono/jwt";

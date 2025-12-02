@@ -1,7 +1,7 @@
 import { createEmitter, defineHandlers } from "@hono/event-emitter";
 import { POST_KEY, POST_TTL, POSTS_KEY } from "core/config/cache";
 import { redis } from "core/storage/redis";
-import type { Post } from "feat/api/posts/posts.dto";
+import type { Post } from "feat/posts/posts.dto";
 
 export const posts_ee = createEmitter(
   defineHandlers<PostsEvents>({

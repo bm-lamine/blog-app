@@ -1,9 +1,9 @@
-import { EMAIL_VERIFICATION_KEY } from "core/config/auth";
+import { EMAIL_VERIFICATION_KEY } from "core/config/cache";
+import { STATUS_CODE } from "core/lib/status-code";
+import { zodValidator } from "core/middlewares/zod-validator";
 import { redis } from "core/storage/redis";
 import ApiError from "core/utils/api-response";
 import { createApp } from "core/utils/create-app";
-import { STATUS_CODE } from "core/utils/status-code";
-import { zodValidator } from "core/utils/zod-validator";
 import { AuthDto } from "feat/auth/auth.dto";
 import { UsersRepo } from "feat/users/users.repo";
 

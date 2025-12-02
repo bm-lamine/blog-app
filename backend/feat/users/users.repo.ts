@@ -1,7 +1,6 @@
 import { db, schema } from "core/database";
 import { eq } from "drizzle-orm";
-import type { CreateUserDto } from "feat/users/schema/create-user";
-import type { UpdateUserDto } from "feat/users/schema/update-user";
+import type { CreateUserDto, UpdateUserDto } from "./users.dto";
 
 export namespace UsersRepo {
   export async function findByEmail(email: string) {

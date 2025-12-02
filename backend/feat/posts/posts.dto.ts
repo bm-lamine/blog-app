@@ -16,15 +16,15 @@ export namespace PostsDto {
 
   export const create = createInsertSchema(schema.posts, {
     cover: z.url(),
-  }).omit({ id: true, author_id: true, published_at: true });
+  }).omit({ id: true, uid: true, published_at: true });
 
   export const update = createUpdateSchema(schema.posts, {
     cover: z.url(),
   }).omit({ id: true });
 }
 
-export type SelectPostDto = z.infer<typeof PostDto.select>;
-export type CreatePostDto = z.infer<typeof PostDto.create>;
-export type UpdatePostDto = z.infer<typeof PostDto.update>;
+export type SelectPostDto = z.infer<typeof PostsDto.select>;
+export type CreatePostDto = z.infer<typeof PostsDto.create>;
+export type UpdatePostDto = z.infer<typeof PostsDto.update>;
 
 export type Post = InferSelectModel<typeof schema.posts>;

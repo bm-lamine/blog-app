@@ -1,12 +1,12 @@
-import { auth } from "core/middlewares/jwt";
+import { STATUS_CODE } from "core/lib/status-code";
+import jwt from "core/middlewares/jwt";
 import ApiError from "core/utils/api-response";
 import { createApp } from "core/utils/create-app";
-import { STATUS_CODE } from "core/utils/status-code";
 import { UsersRepo } from "feat/users/users.repo";
 
 const profile = createApp();
 
-profile.get("/", auth, async (ctx) => {
+profile.get("/", jwt, async (ctx) => {
   const payload = ctx.get("jwtPayload");
   const foundUser = await UsersRepo.findByEmail(payload.email);
 

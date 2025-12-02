@@ -1,6 +1,6 @@
 import { db, schema } from "core/database";
 import { eq } from "drizzle-orm";
-import type { CreatePostDto, UpdatePostDto } from "feat/api/posts/posts.dto";
+import type { CreatePostDto, UpdatePostDto } from "feat/posts/posts.dto";
 
 export namespace PostsRepo {
   export async function getMany() {
@@ -20,7 +20,7 @@ export namespace PostsRepo {
   export async function createOne(userId: string, data: CreatePostDto) {
     const [post] = await db
       .insert(schema.posts)
-      .values({ author_id: userId, ...data })
+      .values({ uid: userId, ...data })
       .returning();
     return post ?? null;
   }

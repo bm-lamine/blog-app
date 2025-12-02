@@ -1,9 +1,9 @@
 import { POST_KEY, POSTS_KEY, POSTS_TTL } from "core/config/cache";
-import { auth } from "core/middlewares/jwt";
+import { STATUS_CODE } from "core/lib/status-code";
+import jwt from "core/middlewares/jwt";
+import { zodValidator } from "core/middlewares/zod-validator";
 import { redis } from "core/storage/redis";
 import { createApp } from "core/utils/create-app";
-import { STATUS_CODE } from "core/utils/status-code";
-import { zodValidator } from "core/utils/zod-validator";
 import { PostsDto } from "feat/posts/posts.dto";
 import { posts_ee } from "feat/posts/posts.ee";
 import { PostsRepo } from "feat/posts/posts.repo";
@@ -54,7 +54,7 @@ app.get(
   }
 );
 
-app.post("/", auth, zodValidator("json", PostsDto.create), async (c) => {
+app.post("/", jwt, zodValidator("json", PostsDto.create), async (c) => {
   const payload = c.get("jwtPayload");
   const json = c.req.valid("json");
   const post = await PostsRepo.createOne(payload.sub, json);
@@ -77,6 +77,7 @@ app.patch(
   "/:id",
   zodValidator("param", z.object({ id: z.nanoid() })),
   zodValidator("json", PostsDto.update),
+  jwt,
   async (c) => {
     const params = c.req.valid("param");
     const json = c.req.valid("json");
@@ -107,6 +108,7 @@ app.patch(
 app.delete(
   "/:id",
   zodValidator("param", z.object({ id: z.nanoid() })),
+  jwt,
   async (c) => {
     const params = c.req.valid("param");
     const post = await PostsRepo.deleteOne(params.id);

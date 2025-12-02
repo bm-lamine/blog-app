@@ -22,8 +22,8 @@ export namespace UsersDto {
   }).omit({ id: true });
 }
 
-export type CreateUser = z.infer<typeof UsersDto.create>;
-export type SelectUser = z.infer<typeof UsersDto.select>;
-export type UpdateUser = z.infer<typeof UsersDto.update>;
+export type CreateUserDto = z.infer<typeof UsersDto.create>;
+export type SelectUserDto = z.infer<typeof UsersDto.select>;
+export type UpdateUserDto = z.infer<typeof UsersDto.update>;
 
 export type User = InferSelectModel<typeof schema.users>;
