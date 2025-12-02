@@ -1,10 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router";
 
-createRoot(document.getElementById('root')!).render(
+import "@/shared/assets/style.css";
+import Index from "@/shared/pages/Index";
+
+const app = document.getElementById("root")!;
+
+createRoot(app).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Index />} />
+      </Routes>
+    </BrowserRouter>
+  </StrictMode>
+);
