@@ -3,14 +3,14 @@ import ApiError from "core/utils/api-response";
 import { createApp } from "core/utils/create-app";
 import { STATUS_CODE } from "core/utils/status-code";
 import { zodValidator } from "core/utils/zod-validator";
-import { signIn } from "feat/auth/schema/sign-in";
-import { UsersRepo } from "feat/users/repository";
+import { AuthDto } from "feat/auth/auth.dto";
+import { UsersRepo } from "feat/users/users.repo";
 import * as jwt from "hono/jwt";
 import { nanoid } from "nanoid";
 
 const signin = createApp();
 
-signin.post("/", zodValidator("json", signIn), async (ctx) => {
+signin.post("/", zodValidator("json", AuthDto.signin), async (ctx) => {
   const json = ctx.req.valid("json");
   const foundUser = await UsersRepo.findByEmail(json.email);
 

@@ -2,13 +2,13 @@ import ApiError from "core/utils/api-response";
 import { createApp } from "core/utils/create-app";
 import { STATUS_CODE } from "core/utils/status-code";
 import { zodValidator } from "core/utils/zod-validator";
-import { signUp } from "feat/auth/schema/sign-up";
-import { users_ee } from "feat/users/events/emitter";
-import { UsersRepo } from "feat/users/repository";
+import { AuthDto } from "feat/auth/auth.dto";
+import { users_ee } from "feat/users/users.ee";
+import { UsersRepo } from "feat/users/users.repo";
 
 const signup = createApp();
 
-signup.post("/", zodValidator("json", signUp), async (ctx) => {
+signup.post("/", zodValidator("json", AuthDto.signup), async (ctx) => {
   const json = ctx.req.valid("json");
 
   const foundUser = await UsersRepo.findByEmail(json.email);
@@ -32,7 +32,7 @@ signup.post("/", zodValidator("json", signUp), async (ctx) => {
     return ctx.json(errors.toJSON(), STATUS_CODE.INTERNAL_SERVER_ERROR);
   }
 
-  users_ee.emit(ctx, "user:verify-email", newUser);
+  await users_ee.emitAsync(ctx, "user:verify-email", newUser);
 
   return ctx.json({
     user: { ...newUser, password: null },

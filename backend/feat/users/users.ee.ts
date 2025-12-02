@@ -5,7 +5,8 @@ import {
 } from "core/config/auth";
 import { redis } from "core/storage/redis";
 import { MailService } from "core/utils/mail-service";
-import type { UserEvents } from "./types";
+import type { UserEvents } from "./events/types";
+import type { User } from "./schema/select-user";
 
 export const users_ee = createEmitter(
   defineHandlers<UserEvents>({
@@ -28,3 +29,7 @@ export const users_ee = createEmitter(
     ],
   })
 );
+
+export type UsersEvents = {
+  "user:verify-email": User;
+};

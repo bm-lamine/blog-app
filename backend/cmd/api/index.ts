@@ -1,19 +1,23 @@
 import { env } from "core/config/env";
 import { tus } from "core/storage/tus";
 import { createApp } from "core/utils/create-app";
-import { api } from "feat/api";
-import { auth } from "feat/auth";
+import { auth } from "feat/auth/auth.api";
+import { posts } from "feat/posts/posts.api";
 import { cors } from "hono/cors";
 import { showRoutes } from "hono/dev";
 import { logger } from "hono/logger";
 import { requestId } from "hono/request-id";
 
-const app = createApp();
+const app = createApp().basePath("/api");
 
 app.use(logger(), requestId(), cors());
+
+// API Routes
 app.all("/files/*", (ctx) => tus.handleWeb(ctx.req.raw));
 app.route("/auth", auth);
-app.route("/api", api);
+app.route("/posts", posts);
+
+// Dev Plugins
 showRoutes(app);
 
 export default {

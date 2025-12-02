@@ -2,7 +2,7 @@ import { auth } from "core/middlewares/jwt";
 import ApiError from "core/utils/api-response";
 import { createApp } from "core/utils/create-app";
 import { STATUS_CODE } from "core/utils/status-code";
-import { UsersRepo } from "feat/users/repository";
+import { UsersRepo } from "feat/users/users.repo";
 
 const profile = createApp();
 
